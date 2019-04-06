@@ -7,6 +7,7 @@ import numpy as np
 import sys
 import random
 from copy import deepcopy
+import pickle
 
 from util import load_data
 from model import RNN
@@ -30,6 +31,11 @@ if __name__ == "__main__":
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     txt_lang, label_lang, pairs = load_data()
+    with open('input.pickle', 'wb') as f:
+        pickle.dump(txt_lang, f)
+    with open('target.pickle', 'wb') as f:
+        pickle.dump(label_lang, f)
+    hidden_size =256
     hidden_size = 256
 
     # モデルと損失関数と最適化手法の定義
